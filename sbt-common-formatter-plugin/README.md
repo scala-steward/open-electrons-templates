@@ -68,7 +68,7 @@ built and published as a jar which is then used by the referenced projects durin
 
 We use [scalafmt](https://scalameta.org/scalafmt/) for formatting all source code, build files etc.,
 
-To add any new scala formatter settings using the configuration options (https://scalameta.org/scalafmt/docs/configuration.html)
+To add any new scala formatter settings using the [configuration options](https://scalameta.org/scalafmt/docs/configuration.html)
 go to the OpenElectronsScalaFmtPlugin.scala file and there you will find the commonly defined configurations defined
 as:
 
@@ -82,7 +82,7 @@ as:
     """
 ```
 
-defined as a string interpolaion(https://docs.scala-lang.org/overviews/core/string-interpolation.html). To add any new
+defined as a [string interpolaion](https://docs.scala-lang.org/overviews/core/string-interpolation.html). To add any new
 configuration or update the existing ones, directly modify it there. Please refer to the <a href="#publishing">Publishing</a>
 on how to publish your changes so that all the other projects can apply this new formatter configuration.
 
