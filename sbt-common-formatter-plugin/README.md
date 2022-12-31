@@ -1,421 +1,281 @@
-# Code Style Guide
+# sbt-common-formatter-plugin
 
-sbt compile publishLocal to publish the plugin
+This is a sbt plugin that contains the distributable scala source code formatter settings that are supposed to be used
+across all the other open-electrons projects.
 
-At open-electrons, we would like to follow the best practices code discipline with all our code bases. This guide here 
-draws ideas from the experience of the engineers developing and maintaining the open-electrons projects, and from the experience 
-of the broader open source community, we try to maintain high coding standards. Should you find any suggestions or even
-improvements, please consider giving a pull request with your changes.
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
 
-## <a name='TOC'>Table of Contents</a>
+*** For informarion on how to create shields and icons, have a look at this useful documentation
+*** https://javascript.plainenglish.io/how-to-make-custom-language-badges-for-your-profile-using-shields-io-d2aeaf016b6b
 
-1. [Document History](#history)
+TODO: These badges do not apply yet as the repo is still in private mode!
 
-2. [Scala Code Syntax](#syntax)
-    * [Naming Convention](#naming)
-    * [Variable Naming Convention](#variable-naming)
-    * [Line Length](#linelength)
-    * [Rule of 30](#rule_of_30)
-    * [Spacing and Indentation](#indent)
-    * [Blank Lines (Vertical Whitespace)](#blanklines)
-    * [Parentheses](#parentheses)
-    * [Curly Braces](#curly)
-    * [Long Literals](#long_literal)
-    * [Documentation Style](#doc)
-    * [Imports](#imports)
-    * [Pattern Matching](#pattern-matching)
-    * [Infix Methods](#infix)
-    * [Anonymous Methods](#anonymous)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
+-->
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#publishing">Publishing</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#builtwith">Built With</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
 
-## <a name='history'>Document History</a>
-- 2022-30-12: Initial version.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-## <a name='syntax'>Scala Code Syntax</a>
+Having a formatted source code is essential in any project, having the settings and configuration for the formatter in one
+common location that can be shared across projects is even more important so that the changes to the formatter
+happens once in a single place and can be controlled, distributed and applied to all the other projects.
 
-### <a name='naming'>Naming Convention</a>
+Scala [sbt](https://www.scala-sbt.org/) offers a way to [build your own plugin](https://www.scala-sbt.org/1.x/docs/Plugins.html#Creating+an+auto+plugin) 
+and use it in your projects. This is exactly what we do here, the common formatter settings are configured here and is
+built and published as a jar which is then used by the referenced projects during the build phase.
 
-We mostly follow Java's and Scala's standard naming conventions.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Classes, traits, objects should follow Java class convention, i.e. PascalCase style.
-  ```scala
-  class MeasurementUnit
 
-  trait ChargeDetailRecord
+<!-- GETTING STARTED -->
+## Getting Started
+
+We use [scalafmt](https://scalameta.org/scalafmt/) for formatting all source code, build files etc.,
+
+To add any new scala formatter settings using the configuration options (https://scalameta.org/scalafmt/docs/configuration.html)
+go to the OpenElectronsScalaFmtPlugin.scala file and there you will find the commonly defined configurations defined
+as:
+
+```scala
+  val commonScalaFormatConfig: String =
+    """
+      |version = 3.6.1
+      |runner.dialect = scala213source3
+      ...
+      ...
+    """
+```
+
+defined as a string interpolaion(https://docs.scala-lang.org/overviews/core/string-interpolation.html). To add any new
+configuration or update the existing ones, directly modify it there. Please refer to the <a href="#publishing">Publishing</a>
+on how to publish your changes so that all the other projects can apply this new formatter configuration.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Prerequisites
+
+You need to have the following tools installed on your local machine
+* scala
+  ```
+  https://scala-lang.org
   ```
 
-- Packages should follow Java package naming conventions, i.e. all-lowercase ASCII letters.
-  ```scala
-  package com.openelectrons.ocpp
+* sbt
+  ```
+  https://www.scala-sbt.org/
   ```
 
-- Methods/functions should be named in camelCase style.
-
-- Global constants should be all uppercase letters (possibly defined in a companion object).
-  ```scala
-  object AppConfig {
-    val DEFAULT_APP_PORT = 9000
-  }
-  ```
-
-- Enumerations should be defined in a sealed trait with a companion object containing the implementations. For example:
-  ```scala
-    sealed trait MeasurementUnit { def name: String }
-    object MeasurementUnit {
-      case object Watt extends MeasurementUnit { val name: String = "W" }
-      case object KiloWatt extends MeasurementUnit { val name: String = "KW" }
-     }
-  ```
-
-### <a name='variable-naming'>Variable Naming Convention</a>
-
-- Variables should be named in camelCase style, and should have self-evident names.
-  ```scala
-  val serverPort = 9000
-  val clientPort = 9001
-  ```
-
-### <a name='linelength'>Line Length</a>
-
-- Limit lines to 100 characters.
-- The only exceptions are import statements and URLs (although even for those, try to keep them under 100 chars).
-
-
-### <a name='rule_of_30'>Rule of 30</a>
-
-We tend to stick to the following rough guidelines:
-
-- A method should contain less than 30 lines of code.
-- A class should contain less than 30 methods.
-- A package should not contain more than 30 classes, thus comprising up to 27,000 LoC
-
-
-### <a name='indent'>Spacing and Indentation</a>
-
-- Put one space before and after operators, including the assignment operator.
-  ```scala
-  def plus(int1: Int, int2: Int): Int = int1 + int2
-  ```
-
-- Put one space after commas.
-  ```scala
-  Seq("a", "b", "c") // this is pleasing to the eye
-
-  Seq("a","b","c")   // this looks clumsy and crowded, do not do this!
-  ```
-
-- Put one space after colons.
-  ```scala
-  // do this
-  def getConf(key: String, defaultValue: String): String = {
-    // some code
-  }
-
-  // don't put spaces before colons
-  def calculateHeaderPortionInBytes(count: Int) : Int = {
-    // some code
-  }
-
-  // don't omit spaces after colons
-  def multiply(int1:Int, int2:Int): Int = int1 * int2
-  ```
-
-- Each level of indentation is 2 spaces. Tabs should not be used!
-  ```scala
-  // wrong!
-  class Foo {
-      def fourspaces = {
-          val x = 4
-          ......
-      }
-  }
-  
-  // right!
-  class Foo {
-    def twospaces = {
-      val x = 2
-      ..
-    }
-  }
-  ```
-
-- For method declarations, use 2 space indentation for their parameters and put each in each line when the parameters 
-don't fit in two lines. Return types can be either on the same line as the last parameter, or start a new line 
-with 2 space indent.
-
-  ```scala
-  def users[M <: Monad](
-    database: Database,
-    filter: UserFilter): M[List[User]] = {
-    // method body
-  }
-  ```
-
-- For classes whose header doesn't fit in two lines, use 2 space indentation for its parameters, put each in each line, 
-put the extends on the next line with 2 space indent, and add a blank line after class header.
-
-  ```scala
-  final case class Foo(
-    param1: String,  // 2 space indent for parameters
-    param2: String,
-    param3: Array[Byte])
-    extends FooInterface  // 2 space indent here
-    with Logging {
-
-    def firstMethod(): Unit = { ... }  // blank line above
-  }
-  ```
-
-- For method and class constructor invocations, use 2 space indentation for its parameters and put each in each 
-line when the parameters don't fit in two lines.
-
-  ```scala
-  foo(
-    someVeryLongFieldName,  // 2 space indent here
-    andAnotherVeryLongFieldName,
-    "this is a string",
-    3.1415)
-
-  new Bar(
-    someVeryLongFieldName,  // 2 space indent here
-    andAnotherVeryLongFieldName,
-    "this is a string",
-    3.1415)
-  ```
-
-- Do NOT use vertical alignment. Though they might look neatly done, they are less maintainable 
-change in the future.
-  ```scala
-  // Don't align vertically
-  val plus     = "+"
-  val minus    = "-"
-  val multiply = "*"
-
-  // Do the following
-  val plus = "+"
-  val minus = "-"
-  val multiply = "*"
-  ```
-
-
-### <a name='blanklines'>Blank Lines (Vertical Whitespace)</a>
-
-- A single blank line appears:
-  - Between consecutive members (or initializers) of a class: fields, constructors, methods, nested classes, static 
-  initializers, instance initializers.
-    - Exception: A blank line between two consecutive fields (having no other code between them) is optional. Such blank lines 
-    are used as needed to create logical groupings of fields.
-  - Within method bodies, as needed to create logical groupings of statements.
-  - Optionally before the first member or after the last member of the class (neither encouraged nor discouraged).
-- Use one or two blank line(s) to separate class or object definitions.
-- Excessive number of blank lines is discouraged.
-
-
-### <a name='parentheses'>Parentheses</a>
-
-- Methods should be declared with parentheses, unless they are accessors that have no 
-side-effect (state mutation, I/O operations, throwing exceptions are considered side-effects).
-  ```scala
-  class Job {
-    // Wrong: killJob changes state. Should have ().
-    def killJob: Unit
-
-    // Correct:
-    def killJob(): Unit
-  }
-  ```
-- Call site should follow method declaration, i.e. if a method is declared with parentheses, call with parentheses.
-  Note that this is not just syntactic. It can affect correctness when `apply` is defined in the return object.
-  ```scala
-  class Foo {
-    def apply(args: String*): Int
-  }
-
-  class Bar {
-    def foo: Foo
-  }
-
-  new Bar().foo  // This returns a Foo
-  new Bar().foo()  // This returns an Int!
-  ```
-
-
-### <a name='curly'>Curly Braces</a>
-
-- Put curly braces even around one-line conditional or loop statements. The only exception is if you are using if/else as 
-an one-line ternary operator that is also side-effect free.
-  ```scala
-  // Correct:
-  if (true) {
-    println("Wow!")
-  }
-
-  // Correct:
-  if (true) statement1 else statement2
-
-  // Correct:
-  try {
-    foo()
-  } catch {
-    ...
-  }
-
-  // Wrong:
-  if (true)
-    println("Wow!")
-
-  // Wrong:
-  try foo() catch {
-    ...
-  }
-  ```
-
-
-### <a name='long_literal'>Long Literals</a>
-
-- Suffix long literal values with uppercase `L`. It is often hard to differentiate lowercase `l` from `1`.
-  ```scala
-  val longValue = 5432L  // Do this
-
-  val longValue = 5432l  // Do NOT do this
-  ```
-
-
-### <a name='doc'>Documentation Style</a>
-
-- Use Java docs style instead of Scala docs style.
-  ```scala
-  /** This is a correct one-liner, short description. */
-
-  /**
-   * This is correct multi-line JavaDoc comment. And
-   * this is my second line, and if I keep typing, this would be
-   * my third line.
-   */
-
-  /** This Scala doc style looks not so ordered, so please do not use this
-    * documenting your code and comments.
-    */
-  ```
-
-
-### <a name='imports'>Imports</a>
-
-- __Avoid using wildcard imports__, unless you are importing more than 6 entities, or implicit methods. Wildcard imports make the code less robust to external changes.
-- Always import packages using absolute paths (e.g. `scala.util.Random`) instead of relative ones (e.g. `util.Random`).
-- In addition, sort imports in the following order:
-  * `java.*` and `javax.*`
-  * `scala.*`
-  * Third-party libraries (`org.*`, `com.*`, etc)
-  * Project classes (`com.databricks.*` or `org.apache.spark` if you are working on Spark)
-- Within each group, imports should be sorted in alphabetic ordering.
-- You can use IntelliJ's import organizer to handle this automatically, using the following config:
-
-  ```
-  java
-  javax
-  _______ blank line _______
-  scala
-  _______ blank line _______
-  all other imports
-  _______ blank line _______
-  com.databricks  // or org.apache.spark if you are working on Spark
-  ```
-
-
-### <a name='pattern-matching'>Pattern Matching</a>
-
-- For methods whose entire body is a pattern match expression, put the match on the same line as the method declaration 
-if possible to reduce one level of indentation.
-  ```scala
-  def test(msg: Message): Unit = msg match {
-    case x => ....
-    case y => ....
-  }
-  ```
-
-- When calling a function with a closure (or partial function), if there is only one case, put the case on the same 
-line as the function invocation.
-  ```scala
-  list.zipWithIndex.map { case (elem, i) =>
-    // ...
-  }
-  ```
-  If there are multiple cases, indent and wrap them.
-  ```scala
-  list.map {
-    case a: Foo =>  ...
-    case b: Bar =>  ...
-  }
-  ```
-
-- If the only goal is to match on the type of the object, do NOT expand fully all the arguments, as it makes refactoring 
-more difficult and the code more error prone.
-  ```scala
-  case class Pokemon(name: String, weight: Int, hp: Int, attack: Int, defense: Int)
-  case class Human(name: String, hp: Int)
-  
-  // Do NOT do the following, because
-  // 1. When a new field is added to Pokemon, we need to change this pattern matching as well
-  // 2. It is easy to mismatch the arguments, especially for the ones that have the same data types
-  targets.foreach {
-    case target @ Pokemon(_, _, hp, _, defense) =>
-      val loss = sys.min(0, myAttack - defense)
-      target.copy(hp = hp - loss)
-    case target @ Human(_, hp) =>
-      target.copy(hp = hp - myAttack)
-  }
-  
-  // Do this:
-  targets.foreach {
-    case target: Pokemon =>
-      val loss = sys.min(0, myAttack - target.defense)
-      target.copy(hp = target.hp - loss)
-    case target: Human =>
-      target.copy(hp = target.hp - myAttack)
-  }
-  ```
-
-
-### <a name='infix'>Infix Methods</a>
-
-__Avoid infix notation__ for methods that aren't symbolic methods (i.e. operator overloading).
-  ```scala
-  // Correct
-  list.map(func)
-  string.contains("foo")
-
-  // Wrong
-  list map (func)
-  string contains "foo"
-
-  // But overloaded operators should be invoked in infix style
-  arrayBuffer += elem
-  ```
-
-
-### <a name='anonymous'>Anonymous Methods</a>
-
-__Avoid excessive parentheses and curly braces__ for anonymous methods.
-  ```scala
-  // Correct
-  list.map { item =>
-    ...
-  }
-
-  // Correct
-  list.map(item => ...)
-
-  // Wrong
-  list.map(item => {
-    ...
-  })
-
-  // Wrong
-  list.map { item => {
-    ...
-  }}
-
-  // Wrong
-  list.map({ item => ... })
-  ```
+### Publishing
+
+_This project is intended to be used as a library. To publish the project locally to your repository cache, run 
+the following steps_
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/open-electrons/ocpp-scala.git
+   ```
+
+2. To build and publish
+   ```
+   sbt publishLocal
+   ```
+
+    By default, the project is compiled to Scala 3.1.x. To cross build to multiple scala versions (2.13.x and 3.1.x), use
+    the following command:
+
+    ```
+    sbt +publishLocal
+    ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+_Packages are cross compiled to Scala versions 2.12 and 3.1. So just pick the version that you need._
+
+For sbt,
+```
+"org.openelectrons" %% "ocpp-messages" % 0.0.7-SNAPAHOT
+"org.openelectrons" %% "ocpp-j-api"    % 0.0.7-SNAPAHOT
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.md` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Joesan on Mastodon - [@joesan@fosstodon.org](https://fosstodon.org/@joesan)
+
+Project Link: [https://github.com/open-electrons/ocpp-example-server](https://github.com/open-electrons/ocpp-example-server)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Built With
+
+* [![Scala][Scala]][Scala-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Img Shields](https://shields.io)
+* [GitHub Pages](https://pages.github.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/open-electrons/ocpp-example-server.svg?style=for-the-badge
+[contributors-url]: https://github.com/open-electrons/ocpp-example-server/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/open-electrons/ocpp-example-server.svg?style=for-the-badge
+[forks-url]: https://github.com/open-electrons/ocpp-example-server/network/members
+[stars-shield]: https://img.shields.io/github/stars/open-electrons/ocpp-example-server.svg?style=for-the-badge
+[stars-url]: https://github.com/open-electrons/ocpp-example-server/stargazers
+[issues-shield]: https://img.shields.io/github/issues/open-electrons/ocpp-example-server.svg?style=for-the-badge
+[issues-url]: https://github.com/open-electrons/ocpp-example-server/issues
+[license-shield]: https://img.shields.io/github/license/open-electrons/ocpp-example-server.svg?style=for-the-badge
+[license-url]: https://github.com/open-electrons/ocpp-example-server/blob/master/LICENSE.md
+[product-screenshot]: images/screenshot.png
+[Scala]: https://img.shields.io/badge/-scala-red?logo=scala
+[Scala-url]: https://www.scala-lang.org/
+[Play-Framework]: https://img.shields.io/badge/-play-green?logo=play-framework
+[Play-Framework-url]: https://www.playframework.com/
+
+-------------------- OLD README ----------------------------------------------------------------------------------------
+
+
+# Open Charge Point Protocol for Scala
+
+To build and publish locally: sbt publishLocal
+
+#### Supported operations
+
+The spec covers the OCPP 2.0.1 JSON specification. All the messages listed as per the specification is implemented.
+
+## Usage
+
+Packages are cross compiled to Scala versions 2.12 and 3.1. So just pick the version that you need.
+
+For sbt, 
+```
+"org.openelectrons" %% "ocpp-messages" % 0.0.7-SNAPAHOT
+"org.openelectrons" %% "ocpp-j-api"    % 0.0.7-SNAPAHOT
+```
+
+## Releases
+
+We use tag's for doing releases. To tag a release do the following:
+
+1. Commit pending changes into the master branch and push the master branch into Git
+
+2. Run the following commands (Make sure to adjust the SemVer appropriately):
+
+```
+git tag -a v2.2.2 -m "Your comments" // Create annotated tag
+
+git push origin --tags               // Push annotated tag
+```
+
+To have automatic bump of the tags, use the following command:
+
+```
+// Create annotated tag by incrementing the latest tag version
+git tag -a `git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`-SNAPSHOT -m "your comments"
+
+ // Push the recently annotated tag
+git push origin --tags              
+```
+
+For more information on releases, see the releases page [here](https://github.com/open-electrons/ocpp-scala/releases)
+
+For more information on published packages, see the packages page [here](https://github.com/orgs/open-electrons/packages?repo_name=ocpp-scala)
+
+## Licensing
+
+This software is licensed under MIT License. [Have a look here for more information](https://github.com/open-electrons/ocpp-scala/blob/master/LICENSE)
+
+## Contributing
+
+For more information on how to contribute, have a look [here](https://github.com/open-electrons/ocpp-scala/blob/master/CONTRIBUTING.md)
+
+## Maintainers
+
+- [Joesan](https://github.com/joesan)
+
+## Acknowledgements
+
+- [Open Charge Alliance](https://www.openchargealliance.org/)
+
+
+
+
+
