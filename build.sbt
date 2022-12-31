@@ -1,18 +1,5 @@
-import sbt.Keys.{licenses, startYear}
+name := "open-electrons-templates"
 
-lazy val scala313 = "3.1.3"
-lazy val scala2138 = "2.13.8"
-lazy val supportedScalaVersions = List(scala313, scala2138)
-
-// Release / Publish definitions
-ThisBuild / organization         := "com.openelectrons"
-ThisBuild / scalaVersion         := "3.1.3"
-// don't publish the outer enclosing project, i.e. "com.openelectrons" % "open-electrons-templates"
-ThisBuild / publish / skip       := true
-ThisBuild / publishMavenStyle    := true
-ThisBuild / publishTo := Some(
-  "GitHub Package Registry " at "https://maven.pkg.github.com/open-electrons/oscp-scala"
-)
 ThisBuild / credentials += Credentials(
   "GitHub Package Registry", // realm
   "maven.pkg.github.com", // host
@@ -36,7 +23,7 @@ val publishSettings = Seq(
   )
 ) */
 
-lazy val openElectronsTemplates = (project in file("."))
+lazy val root = (project in file("."))
   .aggregate(sbtCommonFormatterPlugin)
   .disablePlugins(HeaderPlugin)
   .settings(
@@ -46,8 +33,4 @@ lazy val openElectronsTemplates = (project in file("."))
   )
 
 // sbt-common-formatter-plugin is configured in its own build.sbt file
-lazy val sbtCommonFormatterPlugin = project
-
-// publishing settings needed at the top level project when running "sonatypeBundleRelease"
-sonatypeCredentialHost := "s01.oss.sonatype.org"
-sonatypeProfileName := "com.openelectrons"
+lazy val sbtCommonFormatterPlugin = project.in(file("sbt-common-formatter-plugin"))

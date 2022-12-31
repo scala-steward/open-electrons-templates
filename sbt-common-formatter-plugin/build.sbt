@@ -1,4 +1,4 @@
-lazy val root = (project in file("."))
+lazy val sbtCommonFormatterPlugin = (project in file("."))
   .enablePlugins(SbtPlugin)
   .settings(
     name := "openelectrons-scalafmt-common-sbt-plugin",
