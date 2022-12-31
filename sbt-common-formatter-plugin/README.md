@@ -174,7 +174,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.md` for more information.
+Distributed under the Apache License 2.0. See `LICENSE.md` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -184,7 +184,9 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 Joesan on Mastodon - [@joesan@fosstodon.org](https://fosstodon.org/@joesan)
 
-Project Link: [https://github.com/open-electrons/ocpp-example-server](https://github.com/open-electrons/ocpp-example-server)
+Project Link: [https://github.com/open-electrons](https://github.com/open-electrons)
+
+Project Documentation: [https://open-electrons.github.io/home/](https://open-electrons.github.io/home/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
