@@ -103,25 +103,26 @@ You need to have the following tools installed on your local machine
 
 ### Publishing
 
-_This project is intended to be used as a library. To publish the project locally to your repository cache, run 
+_This project is intended to be used as a sbt plugin library. To publish the project locally to your repository cache, run 
 the following steps_
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/open-electrons/ocpp-scala.git
+   git clone https://github.com/open-electrons/open-electrons-templates.git
    ```
 
-2. To build and publish
-   ```
-   sbt publishLocal
+2. Navigate to the project folder
+   ```sh
+   me@my-linux-machine:~/Projects/open-electrons-templates$ cd sbt-common-formatter-plugin/
    ```
 
-    By default, the project is compiled to Scala 3.1.x. To cross build to multiple scala versions (2.13.x and 3.1.x), use
-    the following command:
+3. To build and publish locally on your machine
+   ```
+   sbt compile publishLocal
+   ```
 
-    ```
-    sbt +publishLocal
-    ```
+    By default, the project is compiled to Scala 2.12.17. As sbt currently only supports scala 2.12, all plugins that
+    are built should be published for Scala 2.12 only.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -129,12 +130,25 @@ the following steps_
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-_Packages are cross compiled to Scala versions 2.12 and 3.1. So just pick the version that you need._
+To add this plugin to your project, make sure to include the following to your plugins.sbt:
 
-For sbt,
+In your _plugins.sbt_ add the plug in definitions:
 ```
-"org.openelectrons" %% "ocpp-messages" % 0.0.7-SNAPAHOT
-"org.openelectrons" %% "ocpp-j-api"    % 0.0.7-SNAPAHOT
+// For formatting source code
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.6")
+addSbtPlugin("com.openelectrons" % "openelectrons-scalafmt" % "0.0.1")
+```
+
+In your _build.sbt_ enable the plugin:
+```
+lazy val yourModule =
+  module("your-scala-project")
+    .enablePlugins(AutomateHeaderPlugin, OpenElectronsScalaFmtPlugin)
+    .settings(
+      name := """your-scala-project""",
+      ......
+      ......
+    )
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
