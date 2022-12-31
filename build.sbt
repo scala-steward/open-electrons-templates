@@ -34,5 +34,6 @@ lazy val openElectronsTemplate = (project in file("."))
 
 // sbt-common-formatter-plugin is configured in its own build.sbt file
 lazy val sbtCommonFormatterPlugin = project.in(file("sbt-common-formatter-plugin"))
-lazy val openElectronsSBTTemplate = project.in(file("open-electrons-sbt-template"))
-lazy val openElectronsSBTMultiModuleTemplate = project.in(file("open-electrons-sbt-template-multi-module"))
+// Project templates
+lazy val openElectronsSBTTemplate = project.in(file("open-electrons-sbt-template.g8"))
+lazy val openElectronsSBTMultiModuleTemplate = project.in(file("open-electrons-sbt-template-multi-module.g8"))
