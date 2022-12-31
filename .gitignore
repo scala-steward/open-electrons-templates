@@ -1,6 +1,5 @@
 *.idea
 *.bsp
 target/*
-project/*
 */target/*
 */project/target/*
