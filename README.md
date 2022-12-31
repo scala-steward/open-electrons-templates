@@ -4,11 +4,11 @@ Collection of templates, guidelines etc., for all open-electrons projects!
 
 ## sbt-scala-project single module
 
-Check [here](https://github.com/open-electrons/open-electrons-templates/open-electrons-sbt-template)
+Check [here](https://github.com/open-electrons/open-electrons-templates/open-electrons-sbt-template.g8)
 
 ## sbt-scala-project multi module
 
-Check [here](https://github.com/open-electrons/open-electrons-templates/open-electrons-sbt-template-multi-module)
+Check [here](https://github.com/open-electrons/open-electrons-templates/open-electrons-sbt-template-multi-module.g8)
 
 ## License
 
