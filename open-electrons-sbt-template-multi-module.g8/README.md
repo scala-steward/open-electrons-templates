@@ -1,59 +1,16 @@
-# Scala sbt template (Multi-Module with App)
+## usage
 
-A [giter8][1] template for Scala projects using sbt. 
-This template sets up a multi-module project. It also includes an application that depends on the modules. 
-An assembly plugin is referenced for building uber-jar of the application.
+1. Checkout the open-electrons-templates project
 
-## Usage
+2. Run one of the following command
 
-```sbt new lewismj/sbt-template.g8```
+```
+// If you have g8 installed locally
+g8 file://open-electrons-sbt-template-multi-module.g8 -o /home/$USER/your/target/location/your-project-name
 
-You can then run:
+// Preferred way to create the project
+sbt new file://open-electrons-sbt-template-multi-module.g8 -o /home/$USER/your/target/location/your-project-name
 
-~~~
-sbt compile
-sbt publish-local
-sbt assembly
-~~~
-
-The assembly command will put the uber-jar into a top level 'bin' directory.
-
-## Example Layout
-
-~~~
-+-- build.sbt
-+-- module1
-|   +-- src
-|     +-- main
-|       +-- scala
-|         +-- com
-|           +-- example
-|             +-- myproject
-|               +-- module1
-|                 +-- Trait1.scala
-+-- module2
-|   +-- src
-|     +-- main
-|       +-- scala
-|         +-- com
-|           +-- example
-|             +-- myproject
-|               +-- module1
-|                 +-- Trait2.scala
-+-- app
-|   +-- src
-|     +-- main
-|       +-- scala
-|         +-- com
-|           +-- example
-|             +-- myproject
-|               +-- app
-|                 +-- HelloWorld.scala
-+-- project
-|  +-- Dependencies.scala
-|  +-- Settings.scala
-|  +-- build.properties
-|  +-- plugins.sbt
-~~~
-
-[1]: https://github.com/n8han/giter8
+// This option currently does not work
+sbt new joesan@open-electrons/open-electrons-templates -d open-electrons-sbt-template-multi-module.g8 -o /home/$USER/your/target/location/your-project-name
+```
