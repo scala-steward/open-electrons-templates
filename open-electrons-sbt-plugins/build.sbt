@@ -1,5 +1,5 @@
 lazy val root = (project in file("."))
-  //.enablePlugins(SbtPlugin)
+  .enablePlugins(SbtPlugin)
   .settings(
     name := "openelectrons-scalafmt-common-sbt-plugin",
     version := "0.0.1",
