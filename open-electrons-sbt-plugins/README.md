@@ -1,5 +1,7 @@
 # Code Style Guide
 
+sbt compile publishLocal to publish the plugin
+
 At open-electrons, we would like to follow the best practices code discipline with all our code bases. This guide here 
 draws ideas from the experience of the engineers developing and maintaining the open-electrons projects, and from the experience 
 of the broader open source community, we try to maintain high coding standards. Should you find any suggestions or even
