@@ -24,7 +24,7 @@ val publishSettings = Seq(
 ) */
 
 lazy val openElectronsTemplate = (project in file("."))
-  .aggregate(sbtCommonFormatterPlugin, openElectronsSBTTemplate, openElectronsSBTMultiModuleTemplate)
+  .aggregate(openElectronsScalaFmtSbtPlugin, openElectronsSBTTemplate, openElectronsSBTMultiModuleTemplate)
   //.disablePlugins(HeaderPlugin)
   .settings(
     // crossScalaVersions must be set to Nil on the aggregating project
@@ -33,7 +33,7 @@ lazy val openElectronsTemplate = (project in file("."))
   )
 
 // sbt-common-formatter-plugin is configured in its own build.sbt file
-lazy val sbtCommonFormatterPlugin = project.in(file("sbt-common-formatter-plugin"))
+lazy val openElectronsScalaFmtSbtPlugin = project.in(file("open-electrons-scala-formatter-sbt-plugin"))
 // Project templates
 lazy val openElectronsSBTTemplate = project.in(file("open-electrons-sbt-template.g8"))
 lazy val openElectronsSBTMultiModuleTemplate = project.in(file("open-electrons-sbt-template-multi-module.g8"))
