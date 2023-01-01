@@ -1,5 +1,12 @@
 name := "open-electrons-templates"
 
+// don't publish the outer enclosing project, i.e. "com.openelectrons" % "ocpp-electrons-templates"
+ThisBuild / publish / skip       := true
+ThisBuild / publishMavenStyle    := true
+ThisBuild / versionScheme        := Some("early-semver")
+ThisBuild / publishTo := Some(
+  "GitHub Package Registry " at "https://maven.pkg.github.com/open-electrons/ocpp-scala"
+)
 ThisBuild / credentials += Credentials(
   "GitHub Package Registry", // realm
   "maven.pkg.github.com", // host
