@@ -4,7 +4,7 @@
 lazy val openElectronsSBTMultiModuleTemplate = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
-    name := "open-electrons-sbt-template-multi-module",
+    name := "open-electrons-templates-sbt-template-multi-module",
     publish / skip := true,
     Test / test := {
       val _ = (Test / g8Test).toTask("").value

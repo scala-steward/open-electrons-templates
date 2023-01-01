@@ -1,7 +1,7 @@
 lazy val sbtCommonFormatterPlugin = (project in file("."))
   .enablePlugins(SbtPlugin)
   .settings(
-    name := "openelectrons-scalafmt",
+    name := "open-electrons-templates-scalafmt",
     version := "0.0.1",
     organization := "com.openelectrons",
     scalaVersion := "2.12.17",
