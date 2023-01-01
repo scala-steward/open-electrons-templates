@@ -1,7 +1,6 @@
 name := "open-electrons-templates"
 
 // don't publish the outer enclosing project, i.e. "com.openelectrons" % "ocpp-electrons-templates"
-ThisBuild / publish / skip       := true
 ThisBuild / publishMavenStyle    := true
 ThisBuild / versionScheme        := Some("early-semver")
 ThisBuild / publishTo := Some(
