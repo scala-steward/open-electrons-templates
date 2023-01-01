@@ -5,7 +5,7 @@ ThisBuild / publish / skip       := true
 ThisBuild / publishMavenStyle    := true
 ThisBuild / versionScheme        := Some("early-semver")
 ThisBuild / publishTo := Some(
-  "GitHub Package Registry " at "https://maven.pkg.github.com/open-electrons/ocpp-scala"
+  "GitHub Package Registry " at s"https://maven.pkg.github.com/open-electrons/$name"
 )
 ThisBuild / credentials += Credentials(
   "GitHub Package Registry", // realm
