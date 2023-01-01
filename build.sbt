@@ -39,8 +39,18 @@ lazy val openElectronsTemplate = (project in file("."))
     publish / skip := true
   )
 
-// sbt-common-formatter-plugin is configured in its own build.sbt file
-lazy val openElectronsScalaFmtSbtPlugin = project.in(file("open-electrons-templates--scala-formatter-sbt-plugin"))
-// Project templates
+lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala-formatter-sbt-plugin"))
+  .enablePlugins(SbtPlugin)
+  .settings(
+    name := "open-electrons-templates-scalafmt",
+    version := "0.0.1",
+    organization := "com.openelectrons",
+    scalaVersion := "2.12.17",
+    sbtPlugin := true,
+    publish / skip := false
+  )
+
+
+// Project g8 templates
 lazy val openElectronsSBTTemplate = project.in(file("open-electrons-templates--sbt-template.g8"))
 lazy val openElectronsSBTMultiModuleTemplate = project.in(file("open-electrons-templates--sbt-template-multi-module.g8"))
