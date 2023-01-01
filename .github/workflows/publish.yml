@@ -1,4 +1,4 @@
-name: publish open-electrons-templates
+name: release open-electrons-templates
 
 on:
   push:
@@ -6,14 +6,12 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+-[a-zA-Z]*'
       - 'v[0-9]+.[0-9]+.[0-9]'
-  release:
-    types: [ created ]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
