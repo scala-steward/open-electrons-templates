@@ -39,7 +39,7 @@ TODO: These badges do not apply yet as the repo is still in private mode!
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#releases">Releases</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -153,6 +153,35 @@ lazy val yourModule =
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<!-- RELEASES -->
+## Releases
+
+We use tag's for doing releases. To tag a release do the following:
+
+1. Commit pending changes into the master branch and push the master branch into Git
+
+2. Run the following commands (Make sure to adjust the SemVer appropriately):
+
+```
+git tag -a v2.2.2 -m "Your comments" // Create annotated tag
+
+git push origin --tags               // Push annotated tag
+```
+
+To have automatic bump of the tags, use the following command:
+
+```
+// Create annotated tag by incrementing the latest tag version
+git tag -a `git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`-SNAPSHOT -m "your comments"
+
+ // Push the recently annotated tag
+git push origin --tags              
+```
+
+For more information on releases, see the releases page [here](https://github.com/open-electrons/open-electrons-templates/releases)
+
+For more information on published packages, see the packages page [here](https://github.com/orgs/open-electrons/packages?repo_name=open-electrons-templates)
 
 <!-- CONTRIBUTING -->
 ## Contributing
