@@ -41,7 +41,7 @@ lazy val openElectronsTemplate = (project in file("."))
 lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala-formatter-sbt-plugin"))
   .enablePlugins(SbtPlugin)
   .settings(
-    name := "open-electrons-templates-scalafmt",
+    name := "openelectrons-scalafmt",
     version := "0.0.1",
     organization := "com.openelectrons",
     scalaVersion := "2.12.17",

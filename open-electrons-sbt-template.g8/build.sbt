@@ -4,7 +4,7 @@
 lazy val openElectronsSBTTemplate = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
-    name := "open-electrons-templates--sbt-template",
+    name := "open-electrons-templates-sbt-template",
     publish / skip := true,
     Test / test := {
       val _ = (Test / g8Test).toTask("").value
