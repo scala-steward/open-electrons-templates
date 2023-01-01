@@ -1,4 +1,4 @@
-name: release sbt-common-formatter-plugin
+name: publish open-electrons-templates
 
 on:
   push:
