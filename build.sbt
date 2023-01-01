@@ -5,7 +5,7 @@ ThisBuild / publish / skip       := true
 ThisBuild / publishMavenStyle    := true
 ThisBuild / versionScheme        := Some("early-semver")
 ThisBuild / publishTo := Some(
-  "GitHub Package Registry " at s"https://maven.pkg.github.com/open-electrons/$name"
+  "GitHub Package Registry " at s"https://maven.pkg.github.com/open-electrons/open-electrons-templates"
 )
 ThisBuild / credentials += Credentials(
   "GitHub Package Registry", // realm
@@ -19,7 +19,7 @@ val publishSettings = Seq(
   publishTo := sonatypePublishToBundle.value,
   sonatypeCredentialHost := "s01.oss.sonatype.org",
   scmInfo := Some(ScmInfo(
-    url("https://github.com/joesan/ocpp-scala"),
+    url("https://github.com/joesan/open-electrons/open-electrons-templates"),
     "scm:git@github.com:joesan/ocpp-scala.git"
   )),
   description := "Scala library for Open Charge Point Protocol (OCPP)",
