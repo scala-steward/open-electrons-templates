@@ -52,7 +52,7 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
 // See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details on this temaplate.
-lazy val openElectronsSBTTemplate = (project in file("."))
+lazy val openElectronsSBTTemplate = (project in file("open-electrons-sbt-template.g8"))
   .enablePlugins(ScriptedPlugin)
   .settings(
     name := "openelectrons-sbt-template",
@@ -68,7 +68,7 @@ lazy val openElectronsSBTTemplate = (project in file("."))
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
 // See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
-lazy val openElectronsSBTTemplateMultiModule = (project in file("."))
+lazy val openElectronsSBTTemplateMultiModule = (project in file("open-electrons-sbt-template-multi-module.g8"))
   .enablePlugins(ScriptedPlugin)
   .settings(
     name := "openelectrons-sbt-template-multi-module",
