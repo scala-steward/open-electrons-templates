@@ -25,6 +25,7 @@ improvements, please consider giving a pull request with your changes.
     * [Infix Methods](#infix)
     * [Anonymous Methods](#anonymous)
 
+3. [Credits](#credits)
 
 ## <a name='history'>Document History</a>
 - 2022-30-12: Initial version.
@@ -417,3 +418,6 @@ __Avoid excessive parentheses and curly braces__ for anonymous methods.
   // Wrong
   list.map({ item => ... })
   ```
+
+
+## <a name='credits'>Credits</a>
