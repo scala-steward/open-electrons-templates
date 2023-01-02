@@ -1,8 +1,10 @@
 name := "open-electrons-templates"
 
 // don't publish the outer enclosing project, i.e. "com.openelectrons" % "ocpp-electrons-templates"
-ThisBuild / publishMavenStyle    := true
-ThisBuild / versionScheme        := Some("early-semver")
+ThisBuild / organization := "com.openelectrons"
+ThisBuild / publishMavenStyle := true
+ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / publish / skip := true
 ThisBuild / publishTo := Some(
   "GitHub Package Registry " at s"https://maven.pkg.github.com/open-electrons/open-electrons-templates"
 )
@@ -30,7 +32,7 @@ val publishSettings = Seq(
 ) */
 
 lazy val openElectronsTemplate = (project in file("."))
-  .aggregate(openElectronsScalaFmtSbtPlugin, openElectronsSBTTemplate, openElectronsSBTMultiModuleTemplate)
+  .aggregate(openElectronsScalaFmtSbtPlugin, openElectronsSBTTemplate, openElectronsSBTTemplateMultiModule)
   //.disablePlugins(HeaderPlugin)
   .settings(
     // crossScalaVersions must be set to Nil on the aggregating project
@@ -42,14 +44,43 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
   .enablePlugins(SbtPlugin)
   .settings(
     name := "openelectrons-scalafmt",
-    version := "0.0.1",
-    organization := "com.openelectrons",
     scalaVersion := "2.12.17",
     sbtPlugin := true,
     publish / skip := false
   )
 
+// This build is for this Giter8 template.
+// To test the template run `g8` or `g8Test` from the sbt session.
+// See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details on this temaplate.
+lazy val openElectronsSBTTemplate = (project in file("."))
+  .enablePlugins(ScriptedPlugin)
+  .settings(
+    name := "openelectrons-sbt-template",
+    publish / skip := true,
+    Test / test := {
+      val _ = (Test / g8Test).toTask("").value
+    },
+    scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-Xss2m", "-Dfile.encoding=UTF-8"),
+    resolvers += Resolver.url("typesafe", url("https://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns)
+  )
+
+
+// This build is for this Giter8 template.
+// To test the template run `g8` or `g8Test` from the sbt session.
+// See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
+lazy val openElectronsSBTTemplateMultiModule = (project in file("."))
+  .enablePlugins(ScriptedPlugin)
+  .settings(
+    name := "openelectrons-sbt-template-multi-module",
+    publish / skip := true,
+    Test / test := {
+      val _ = (Test / g8Test).toTask("").value
+    },
+    scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-XX:MaxPermSize=256m", "-Xss2m", "-Dfile.encoding=UTF-8"),
+    resolvers += Resolver.url("typesafe", url("http://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns)
+  )
+
 
 // Project g8 templates
-lazy val openElectronsSBTTemplate = project.in(file("open-electrons-templates--sbt-template.g8"))
-lazy val openElectronsSBTMultiModuleTemplate = project.in(file("open-electrons-templates--sbt-template-multi-module.g8"))
+//lazy val openElectronsSBTTemplate = project.in(file("open-electrons-templates--sbt-template.g8"))
+//lazy val openElectronsSBTTemplateMultiModule = project.in(file("open-electrons-templates-sbt-template-multi-module.g8"))
