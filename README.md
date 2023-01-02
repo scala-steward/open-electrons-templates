@@ -2,6 +2,10 @@
 
 Collection of templates, guidelines etc., for all open-electrons projects!
 
+## scala-formatter common sbt plugin
+
+Check [here](https://github.com/open-electrons/open-electrons-templates/tree/master/open-electrons-scala-formatter-sbt-plugin)
+
 ## sbt-scala-project single module
 
 Check [here](https://github.com/open-electrons/open-electrons-templates/tree/master/open-electrons-sbt-template.g8)
