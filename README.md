@@ -2,6 +2,22 @@
 
 Collection of templates, guidelines etc., for all open-electrons projects!
 
+## Installations
+
+### Install Scala
+
+To manually install Scala to a location of your choice in Ubuntu, do the following:
+
+```bash
+curl -s https://api.github.com/repos/lampepfl/dotty/releases/latest| grep browser_download_url  | egrep '.tar.gz' | cut -d '"' -f 4 | wget -i -
+```
+
+Extract the archive to a location of your choice. I normally do that under /opt/softwares
+
+```bash
+tar -xf scala3-*.tar.gz
+```
+
 ## scala-formatter common sbt plugin
 
 Check [here](https://github.com/open-electrons/open-electrons-templates/tree/master/open-electrons-scala-formatter-sbt-plugin)
