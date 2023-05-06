@@ -1,0 +1,11 @@
+*.idea
+# Ignore any target folders i the sub modules
+*/*/target/*
+*/*/project/target/*
+*/target/*
+*/project/target/*
+*.bsp
+target/*
+project/target/*
+logs/*
+project/project/target/*
