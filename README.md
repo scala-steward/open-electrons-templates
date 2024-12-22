@@ -24,6 +24,17 @@ To install sbt, refer [here](https://www.scala-sbt.org/1.x/docs/Installing-sbt-o
 
 **HINT: Make sure that you have proper compatibility of versions between Scala, Sbt and Java. For more information, refer [here](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html)**
 
+Additionally, this project contains the common-settings.sbt where several common sbt configurations are defined. These need to be imported in each open-electrons project's sbt file as below:
+
+´´´
+// The shared settings are stored in a file in the open-electrons-templates repository
+val sharedSettingsUrl = "https://github.com/open-electrons/open-electrons-templates/blob/master/common-settings.sbt"
+val sharedSettings = Source.fromURL(sharedSettingsUrl).mkString
+Project.in(file(".")).settings(sharedSettings.split("\n").map(eval): _*)
+´´´
+
+After adding the above lines in the specific project's sbt file, override the individual settings as necessary.
+
 ## scala-formatter common sbt plugin
 
 Check [here](https://github.com/open-electrons/open-electrons-templates/tree/master/open-electrons-scala-formatter-sbt-plugin)
