@@ -75,7 +75,9 @@ ThisBuild / scmInfo := Some(                                 // Source control i
 ThisBuild / resolvers ++= Seq(
   Resolver.mavenCentral,
   Resolver.sonatypeRepo("releases"),
-  Resolver.sonatypeRepo("snapshots")
+  Resolver.sonatypeRepo("snapshots"),
+  "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
+  "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/"
 )
 
 // Compile options
