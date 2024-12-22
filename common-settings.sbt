@@ -50,15 +50,15 @@ scalacOptions ++= Seq(
 ThisBuild / scalaVersion         := scala3
 
 // High-Level Project Details and Configurations
-ThisBuild / organization := "com.openelectrons"              // Organization name
-ThisBuild / scalaVersion := scala3                           // Scala version
-ThisBuild / version := "0.0.1"                               // Project version
-ThisBuild / name := "cpo-platform"                           // Project name
-ThisBuild / description := "cpo related projects"            // Description
-ThisBuild / startYear := Some(2022)                          // Start year
+ThisBuild / organization := "com.openelectrons"                                  // Organization name
+ThisBuild / scalaVersion := scala3                                               // Scala version
+ThisBuild / version := "0.0.1"                                                   // Project version
+ThisBuild / name := "open-electrons-sbt-template"                                // Project name
+ThisBuild / description := "common settings for open-electrons projects"         // Description
+ThisBuild / startYear := Some(2022)                                              // Start year
 ThisBuild / homepage := Some(url("hhttps://open-electrons.github.io/home/"))     // Homepage URL
 ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT")) // License
-ThisBuild / developers := List(                              // Developers
+ThisBuild / developers := List(                                                  // Developers
   Developer(
     id = "joesan",
     name = "Joesan",
