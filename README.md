@@ -18,6 +18,12 @@ Extract the archive to a location of your choice. I normally do that under /opt/
 tar -xf scala3-*.tar.gz
 ```
 
+### Install Sbt
+
+To install sbt, refer [here](https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Mac.html)
+
+**HINT: Make sure that you have proper compatibility of versions between Scala, Sbt and Java. For more information, refer [here](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html)**
+
 ## scala-formatter common sbt plugin
 
 Check [here](https://github.com/open-electrons/open-electrons-templates/tree/master/open-electrons-scala-formatter-sbt-plugin)
