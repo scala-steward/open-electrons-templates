@@ -83,6 +83,7 @@ ThisBuild / scalacOptions ++= Seq(
   "-deprecation",     // Warn about deprecated APIs
   "-feature",         // Warn about misused language features
   "-unchecked",       // Enable additional runtime checks
+  "-Xfatal-warnings",
   "-encoding", "utf8" // Specify file encoding
 )
 
