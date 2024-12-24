@@ -7,7 +7,7 @@ lazy val root = (project in file("."))
   .settings(
       name := "open-electrons-sbt-settings",         // Set project name
       organization := "com.openelectrons",           // Organization
-      version := "1.0.0",                            // Project version
+      version := "0.0.1",                            // Project version
       sbtPlugin := true,                             // SBT Plugin (if you're creating one)
       scalaVersion := scala2,                        // Default Scala version for this build
 

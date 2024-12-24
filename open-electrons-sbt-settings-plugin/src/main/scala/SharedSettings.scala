@@ -4,9 +4,7 @@ import Keys._
 object SharedSettings {
 
   // Scala Versions
-  val scala3 = "3.4.0"
-  val scala2 = "2.13.15"
-  val supportedScalaVersions = Seq(scala3, scala2)
+  lazy val scala3_4_0 = "3.4.0"
 
   // Prints the used scala compiler options
   // Usage: sbt logScalacOptions
@@ -18,9 +16,7 @@ object SharedSettings {
   // High-Level Project Details and Configurations
   val projectMetadata = Seq(
     ThisBuild / organization := "com.openelectrons", // Organization name
-    ThisBuild / scalaVersion := scala3, // Scala version
-    ThisBuild / version := "0.0.1", // Project version
-    ThisBuild / name := "open-electrons-sbt-template", // Project name
+    ThisBuild / scalaVersion := scala3_4_0, // Scala version
     ThisBuild / description := "common settings for open-electrons projects", // Description
     ThisBuild / startYear := Some(2022), // Start year
     ThisBuild / homepage := Some(url("https://open-electrons.github.io/home/")), // Homepage URL
