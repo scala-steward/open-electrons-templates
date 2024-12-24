@@ -8,6 +8,13 @@ object SharedSettings {
   val scala2 = "2.13.15"
   val supportedScalaVersions = Seq(scala3, scala2)
 
+  // Prints the used scala compiler options
+  // Usage: sbt logScalacOptions
+  lazy val logScalacOptions = taskKey[Unit]("Log scalacOptions for debugging")
+  logScalacOptions := {
+    streams.value.log.info(s"scalacOptions: ${scalacOptions.value.mkString(", ")}")
+  }
+
   // High-Level Project Details and Configurations
   val projectMetadata = Seq(
     ThisBuild / organization := "com.openelectrons", // Organization name
