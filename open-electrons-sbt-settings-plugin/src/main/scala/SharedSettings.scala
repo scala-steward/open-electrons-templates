@@ -42,16 +42,6 @@ object SharedSettings {
     "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/"
   ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases")
 
-  // Compile options
-  /*val compileOptions = Seq(
-    "-deprecation",          // Warn about deprecated APIs
-    "-feature",              // Warn about misused language features
-    "-unchecked",            // Enable additional runtime checks
-    "-Xfatal-warnings",      // Fail on warnings
-    "-encoding", "utf8",     // Specify file encoding
-    "-Xignore-scala2-macros" // Ignore Scala 2 macros
-  ) */
-
   // Publishing configuration
   val publishingConfig = Seq(
     ThisBuild / publishTo := {
