@@ -7,7 +7,7 @@ lazy val supportedScalaVersions = List(scala3, scala2)
 lazy val root = (project in file("."))
   .settings(
       name := "open-electrons-sbt-settings",         // Set project name
-      organization := "com.open-electrons",          // Organization
+      organization := "com.openelectrons",           // Organization
       version := "1.0.0",                            // Project version
       sbtPlugin := true,                             // SBT Plugin (if you're creating one)
 
