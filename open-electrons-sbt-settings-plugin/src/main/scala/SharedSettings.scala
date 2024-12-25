@@ -42,7 +42,8 @@ object SharedSettings {
   ThisBuild / resolvers ++= Seq(
     Resolver.mavenCentral,
     "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
-    "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/"
+    "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/",
+    "GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"
   ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases")
 
   // Publishing configuration
