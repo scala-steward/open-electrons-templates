@@ -61,7 +61,7 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
     sbtPlugin := true,
     version := "0.0.3",
     publish / skip := false
-  ) ++ gitHubPublishSettings
+  ).settings(gitHubPublishSettings: _*)
 
 lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-settings-plugin"))
   .enablePlugins(SbtPlugin)
@@ -74,7 +74,7 @@ lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-s
     scalaVersion := "2.12.20",
     sbtPlugin := true,
     publish / skip := false
-  ) ++ gitHubPublishSettings
+  ).settings(gitHubPublishSettings: _*)
 
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
