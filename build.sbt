@@ -12,7 +12,7 @@ ThisBuild / credentials += Credentials(
   "GitHub Package Registry", // realm
   "maven.pkg.github.com", // host
   "joesan", // user
-  sys.env.getOrElse("OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN", "abc123") // password
+  sys.env.getOrElse("GITHUB_TOKEN", "abc123") // password
 )
 
 // Enable all subprojects to be published to GitHub Packages
@@ -23,7 +23,7 @@ lazy val gitHubPublishSettings = Seq(
     "GitHub Package Registry",
     "maven.pkg.github.com",
     "joesan",
-    sys.env.get("OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN").getOrElse("will-be-fetched-via-github")
+    sys.env.get("GITHUB_TOKEN").getOrElse("will-be-fetched-via-github")
   )
 )
 
