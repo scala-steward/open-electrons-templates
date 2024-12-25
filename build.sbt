@@ -49,6 +49,18 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
     publish / skip := false
   )
 
+lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-settings-plugin"))
+  .enablePlugins(SbtPlugin)
+  .settings(
+    name := "openelectrons-sbt-settings",
+    // Define Scala versions, sbt plugin requires to use Scala 2.12
+    // @see https://stackoverflow.com/questions/79301797/sbt-plugin-error-when-cross-compiling-scala-versions?noredirect=1#comment139842520_79301797
+    organization := "com.openelectrons",           // Organization
+    version := "0.0.1",                            // Project version
+    scalaVersion := "2.12.20",
+    sbtPlugin := true
+  )
+
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
 // See http://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details on this temaplate.
@@ -63,7 +75,6 @@ lazy val openElectronsSBTTemplate = (project in file("open-electrons-sbt-templat
     scriptedLaunchOpts ++= List("-Xms1024m", "-Xmx1024m", "-XX:ReservedCodeCacheSize=128m", "-Xss2m", "-Dfile.encoding=UTF-8"),
     resolvers += Resolver.url("typesafe", url("https://repo.typesafe.com/typesafe/ivy-releases/"))(Resolver.ivyStylePatterns)
   )
-
 
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
