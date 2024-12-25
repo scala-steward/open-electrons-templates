@@ -1,5 +1,9 @@
 *.idea
 *.bsp
-target/*
-*/target/*
-*/project/target/*
+*.log
+
+# Ignore all target directories
+**/target/
+
+# Specifically ignore project/target directories
+**/project/target/
