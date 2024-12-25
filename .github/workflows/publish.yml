@@ -35,11 +35,13 @@ jobs:
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload JAR files for each submodule and release
+      - name: ci-release-github
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            $(find ./target/scala-* -name '*.jar')
+          generate_release_notes: true
+          append_body: true
+          prerelease: false
+          draft: false
           tag_name: ${{ github.ref }}
           name: Release ${{ github.ref }}
           body: |

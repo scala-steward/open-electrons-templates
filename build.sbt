@@ -44,6 +44,7 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
   .enablePlugins(SbtPlugin)
   .settings(
     name := "openelectrons-scalafmt",
+    organization := "com.openelectrons",
     scalaVersion := "2.12.20",
     sbtPlugin := true,
     version := "0.0.2",
@@ -59,7 +60,8 @@ lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-s
     organization := "com.openelectrons",           // Organization
     version := "0.0.1",                            // Project version
     scalaVersion := "2.12.20",
-    sbtPlugin := true
+    sbtPlugin := true,
+    publish / skip := false
   )
 
 // This build is for this Giter8 template.
