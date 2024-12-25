@@ -23,7 +23,7 @@ lazy val gitHubPublishSettings = Seq(
     "GitHub Package Registry",
     "maven.pkg.github.com",
     "joesan",
-    sys.env.get("GITHUB_TOKEN").getOrElse("will-be-fetched-via-github")
+    sys.env.get("OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN").getOrElse("will-be-fetched-via-github")
   )
 )
 
