@@ -24,10 +24,9 @@ jobs:
           distribution: 'oracle'
           java-version: '21'
 
-      - name: sbt compile and package
+      - name: sbt compile and publish
         run: |
-          sbt compile
-          sbt package
+          sbt compile publish
 
       - name: capture changelog
         id: changelog
@@ -46,4 +45,4 @@ jobs:
             ## What's Changed
             ${{ steps.changelog.outputs.changelog }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_SECRET }}
