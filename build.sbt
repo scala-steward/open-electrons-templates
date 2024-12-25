@@ -12,7 +12,19 @@ ThisBuild / credentials += Credentials(
   "GitHub Package Registry", // realm
   "maven.pkg.github.com", // host
   "joesan", // user
-  sys.env.getOrElse("GITHUB_TOKEN", "abc123") // password
+  sys.env.getOrElse("OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN", "abc123") // password
+)
+
+// Enable all subprojects to be published to GitHub Packages
+lazy val gitHubPublishSettings = Seq(
+  publishMavenStyle := true,
+  publishTo := Some("GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"),
+  credentials += Credentials(
+    "GitHub Package Registry",
+    "maven.pkg.github.com",
+    "joesan",
+    sys.env.get("OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN").getOrElse("will-be-fetched-via-github")
+  )
 )
 
 /*
@@ -47,9 +59,9 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
     organization := "com.openelectrons",
     scalaVersion := "2.12.20",
     sbtPlugin := true,
-    version := "0.0.2",
+    version := "0.0.3",
     publish / skip := false
-  )
+  ) ++ gitHubPublishSettings
 
 lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-settings-plugin"))
   .enablePlugins(SbtPlugin)
@@ -62,7 +74,7 @@ lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-s
     scalaVersion := "2.12.20",
     sbtPlugin := true,
     publish / skip := false
-  )
+  ) ++ gitHubPublishSettings
 
 // This build is for this Giter8 template.
 // To test the template run `g8` or `g8Test` from the sbt session.
