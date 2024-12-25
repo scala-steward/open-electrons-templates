@@ -46,6 +46,7 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
     name := "openelectrons-scalafmt",
     scalaVersion := "2.12.20",
     sbtPlugin := true,
+    version := "0.0.2",
     publish / skip := false
   )
 
