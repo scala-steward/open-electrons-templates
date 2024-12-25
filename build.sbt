@@ -44,7 +44,7 @@ val publishSettings = Seq(
 ) */
 
 lazy val openElectronsTemplate = (project in file("."))
-  .aggregate(openElectronsScalaFmtSbtPlugin, openElectronsSBTTemplate, openElectronsSBTTemplateMultiModule)
+  .aggregate(openElectronsScalaFmtSbtPlugin, openElectronsSbtSettingsPlugin, openElectronsSBTTemplate, openElectronsSBTTemplateMultiModule)
   //.disablePlugins(HeaderPlugin)
   .settings(
     // crossScalaVersions must be set to Nil on the aggregating project
