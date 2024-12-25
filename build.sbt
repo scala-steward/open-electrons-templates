@@ -1,19 +1,8 @@
 name := "open-electrons-templates"
 
-// don't publish the outer enclosing project, i.e. "com.openelectrons" % "ocpp-electrons-templates"
+ThisBuild / version := "0.0.1"
 ThisBuild / organization := "com.openelectrons"
-ThisBuild / publishMavenStyle := true
-ThisBuild / versionScheme := Some("early-semver")
-ThisBuild / publish / skip := true
-ThisBuild / publishTo := Some(
-  "GitHub Package Registry " at s"https://maven.pkg.github.com/open-electrons/open-electrons-templates"
-)
-ThisBuild / credentials += Credentials(
-  "GitHub Package Registry", // realm
-  "maven.pkg.github.com", // host
-  "joesan", // user
-  sys.env.getOrElse("GITHUB_TOKEN", "abc123") // password
-)
+ThisBuild / scalaVersion := "2.12.20"
 
 // Enable all subprojects to be published to GitHub Packages
 lazy val gitHubPublishSettings = Seq(
@@ -23,7 +12,7 @@ lazy val gitHubPublishSettings = Seq(
     "GitHub Package Registry",
     "maven.pkg.github.com",
     "joesan",
-    sys.env.get("GITHUB_TOKEN").getOrElse("will-be-fetched-via-github")
+    sys.env.get("GITHUB_TOKEN").getOrElse("will-be-fetched-via-github-env")
   )
 )
 
@@ -57,9 +46,9 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
   .settings(
     name := "openelectrons-scalafmt",
     organization := "com.openelectrons",
-    scalaVersion := "2.12.20",
+    //scalaVersion := "2.12.20",
     sbtPlugin := true,
-    version := "0.0.3",
+    //version := "0.0.1",
     publish / skip := false
   ).settings(gitHubPublishSettings: _*)
 
@@ -70,8 +59,8 @@ lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-s
     // Define Scala versions, sbt plugin requires to use Scala 2.12
     // @see https://stackoverflow.com/questions/79301797/sbt-plugin-error-when-cross-compiling-scala-versions?noredirect=1#comment139842520_79301797
     organization := "com.openelectrons",           // Organization
-    version := "0.0.1",                            // Project version
-    scalaVersion := "2.12.20",
+    //version := "0.0.1",                            // Project version
+    //scalaVersion := "2.12.20",
     sbtPlugin := true,
     publish / skip := false
   ).settings(gitHubPublishSettings: _*)
