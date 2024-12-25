@@ -8,8 +8,8 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]'
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PUBLISH_TOKEN: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_SECRET }}
+  #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PUBLISH_TOKEN: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN }}
 
 jobs:
   release:
@@ -33,7 +33,7 @@ jobs:
         id: changelog
         uses: metcalfc/changelog-generator@v4.0.1
         with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+          myToken: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN }}
 
       - name: ci-release-github
         uses: softprops/action-gh-release@v2
@@ -48,4 +48,4 @@ jobs:
             ## What's Changed
             ${{ steps.changelog.outputs.changelog }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_TOKEN }}
