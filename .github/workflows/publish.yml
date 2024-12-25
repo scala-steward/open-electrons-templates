@@ -9,6 +9,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PUBLISH_TOKEN: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_SECRET }}
 
 jobs:
   release:
@@ -22,7 +23,7 @@ jobs:
         id: changelog
         uses: metcalfc/changelog-generator@v4.0.1
         with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+          myToken: ${{ PUBLISH_TOKEN }}
 
       - name: sbt ci-publish-github
         run: sbt compile publish
