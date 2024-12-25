@@ -23,7 +23,7 @@ jobs:
         id: changelog
         uses: metcalfc/changelog-generator@v4.0.1
         with:
-          myToken: ${{ PUBLISH_TOKEN }}
+          myToken: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_SECRET }}
 
       - name: sbt ci-publish-github
         run: sbt compile publish
