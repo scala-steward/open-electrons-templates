@@ -35,38 +35,15 @@ jobs:
         with:
           myToken: ${{ secrets.OPEN_ELECTRONS_GITHUB_PUBLISH_SECRET }}
 
-      - name: Create GitHub release
-        id: create-release
-        uses: actions/create-release@v1
+      - name: Upload JAR files for each submodule and release
+        uses: softprops/action-gh-release@v2
         with:
-          allowUpdates: true
+          files: |
+            $(find ./target/scala-* -name '*.jar')
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          name: Release ${{ github.ref }}
           body: |
             ## What's Changed
             ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
-
-
-      - name: Upload JAR files for each submodule
-        run: |
-          # Define the submodule names (update this list with your submodule names)
-          SUBMODULES=(submodule1 submodule2 submodule3)
-
-          # Iterate over each submodule
-          for module in \"${SUBMODULES[@]}\"; do
-            # Find the JAR file for the current submodule
-            JAR_FILE=$(find ./target/scala-* -name \"$module*.jar\")
-
-            if [ -n \"$JAR_FILE\" ]; then
-              echo \"Uploading $JAR_FILE for $module\"
-              curl -XPOST \
-                -H \"Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}\" \
-                -H \"Content-Type: application/java-archive\" \
-                --data-binary @$JAR_FILE \
-                \"${{ steps.create-release.outputs.upload_url }}?name=$(basename $JAR_FILE)\"
-            else
-              echo \"No JAR file found for $module\"
-            fi
-          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
