@@ -13,15 +13,24 @@ object SharedSettings {
     streams.value.log.info(s"scalacOptions: ${scalacOptions.value.mkString(", ")}")
   }
 
+  // Dependency resolvers
+  val sharedResolvers: Seq[Resolver] = Seq(
+    Resolver.mavenCentral,
+    "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
+    "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/",
+    "GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"
+  ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases")
+
+
   // High-Level Project Details and Configurations
   val projectMetadata = Seq(
-    ThisBuild / organization := "com.openelectrons", // Organization name
-    ThisBuild / scalaVersion := scala3_4_0, // Scala version
-    ThisBuild / description := "common settings for open-electrons projects", // Description
-    ThisBuild / startYear := Some(2022), // Start year
-    ThisBuild / homepage := Some(url("https://open-electrons.github.io/home/")), // Homepage URL
-    ThisBuild / licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT")), // License
-    ThisBuild / developers := List( // Developers
+    organization := "com.openelectrons", // Organization name
+    scalaVersion := scala3_4_0, // Scala version
+    description := "common settings for open-electrons projects", // Description
+    startYear := Some(2022), // Start year
+    homepage := Some(url("https://open-electrons.github.io/home/")), // Homepage URL
+    licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT")), // License
+    developers := List( // Developers
       Developer(
         id = "joesan",
         name = "Joesan",
@@ -29,14 +38,6 @@ object SharedSettings {
         url = url("https://github.com/joesan")
       )
     ),
-    // Dependency resolvers
-    resolvers ++= Seq(
-      Resolver.mavenCentral,
-      "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
-      "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/",
-      "GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"
-    ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases"),
-
     scmInfo := Some(
       ScmInfo(
         browseUrl = url("https://github.com/open-electrons/open-electrons-sbt-template"),
@@ -64,5 +65,7 @@ object SharedSettings {
   )
 
   // Final Shared Settings
-  val settings: Seq[Setting[_]] = projectMetadata ++ publishingConfig
+  val settings: Seq[Setting[_]] = projectMetadata ++ publishingConfig ++ Seq(
+    resolvers ++= sharedResolvers
+  )
 }
