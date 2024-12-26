@@ -8,8 +8,11 @@ object MyPlugin extends AutoPlugin {
     resolvers ++= SharedSettings.sharedResolvers
   ) ++ SharedSettings.projectMetadata
 
+  // Add project-specific settings and tasks
   override def projectSettings: Seq[Setting[_]] = Seq(
-    // Example task for debugging the resolvers
-    SharedSettings.logScalacOptions
+    // Define a task for logging scalacOptions
+    SharedSettings.logScalacOptions := {
+      streams.value.log.info(s"scalacOptions: ${scalacOptions.value.mkString(", ")}")
+    }
   )
 }
