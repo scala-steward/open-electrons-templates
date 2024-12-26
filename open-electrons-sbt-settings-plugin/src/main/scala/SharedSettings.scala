@@ -29,7 +29,15 @@ object SharedSettings {
         url = url("https://github.com/joesan")
       )
     ),
-    ThisBuild / scmInfo := Some(
+    // Dependency resolvers
+    resolvers ++= Seq(
+      Resolver.mavenCentral,
+      "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
+      "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/",
+      "GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"
+    ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases"),
+
+    scmInfo := Some(
       ScmInfo(
         browseUrl = url("https://github.com/open-electrons/open-electrons-sbt-template"),
         connection = "scm:git:https://github.com/open-electrons/open-electrons-sbt-template.git",
@@ -37,14 +45,6 @@ object SharedSettings {
       )
     )
   )
-
-  // Dependency resolvers
-  ThisBuild / resolvers ++= Seq(
-    Resolver.mavenCentral,
-    "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
-    "Typesafe Snapshots" at "https://repo.typesafe.com/typesafe/snapshots/",
-    "GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"
-  ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases")
 
   // Publishing configuration
   val publishingConfig = Seq(
