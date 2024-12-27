@@ -21,7 +21,6 @@ object SharedSettings {
     "GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"
   ) ++ Resolver.sonatypeOssRepos("snapshots") ++ Resolver.sonatypeOssRepos("releases")
 
-
   // High-Level Project Details and Configurations
   val projectMetadata = Seq(
     organization := "com.openelectrons", // Organization name
@@ -64,8 +63,19 @@ object SharedSettings {
     )
   )
 
+  lazy val gitHubPublishSettings = Seq(
+    publishMavenStyle := true,
+    publishTo := Some("GitHub Packages" at "https://maven.pkg.github.com/open-electrons/open-electrons-templates"),
+    credentials += Credentials(
+      "GitHub Package Registry",
+      "maven.pkg.github.com",
+      "joesan",
+      sys.env.get("GITHUB_TOKEN").getOrElse("will-be-fetched-via-github-env")
+    )
+  )
+
   // Final Shared Settings
-  val settings: Seq[Setting[_]] = projectMetadata ++ publishingConfig ++ Seq(
+  val settings: Seq[Setting[_]] = projectMetadata ++ gitHubPublishSettings ++ publishingConfig ++ Seq(
     resolvers ++= sharedResolvers
   )
 }

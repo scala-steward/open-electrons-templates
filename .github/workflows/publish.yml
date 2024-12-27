@@ -27,7 +27,7 @@ jobs:
 
       - name: sbt compile and publish
         run: |
-          sbt -debug clean compile publish
+          sbt clean compile publish
 
       - name: capture changelog
         id: changelog
