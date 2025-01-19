@@ -2,7 +2,7 @@ name := "open-electrons-templates"
 
 ThisBuild / version := "0.0.1"
 ThisBuild / organization := "com.openelectrons"
-ThisBuild / scalaVersion := "2.12.20"
+ThisBuild / scalaVersion := "2.13.16"
 
 // Enable all subprojects to be published to GitHub Packages
 lazy val gitHubPublishSettings = Seq(
@@ -46,7 +46,7 @@ lazy val openElectronsScalaFmtSbtPlugin = (project in file("open-electrons-scala
   .settings(
     name := "openelectrons-scalafmt",
     organization := "com.openelectrons",
-    //scalaVersion := "2.12.20",
+    //scalaVersion := "2.13.16",
     sbtPlugin := true,
     //version := "0.0.1",
     publish / skip := false
@@ -60,7 +60,7 @@ lazy val openElectronsSbtSettingsPlugin = (project in file("open-electrons-sbt-s
     // @see https://stackoverflow.com/questions/79301797/sbt-plugin-error-when-cross-compiling-scala-versions?noredirect=1#comment139842520_79301797
     organization := "com.openelectrons",           // Organization
     //version := "0.0.1",                            // Project version
-    //scalaVersion := "2.12.20",
+    //scalaVersion := "2.13.16",
     sbtPlugin := true,
     publish / skip := false
   ).settings(gitHubPublishSettings: _*)
